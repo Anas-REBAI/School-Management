@@ -1,0 +1,59 @@
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center">
+
+      <h1 class="logo me-auto"><a routerLink="">IPS</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a routerLink="">Home</a></li>
+          <!-- <li><a routerLink="about">About</a></li> -->
+          <li><a  routerLink="courses">Courses</a></li>
+          <li><a  routerLink="trainers">Trainers</a></li>
+          <li><a  routerLink="events">Events</a></li>
+          <li><a  routerLink="pricing">Pricing</a></li>
+
+          <!-- Dashborad Admin -->
+          <li *ngIf="isLoggedIn() && user.role=='admin'" class="dropdown"><a routerLink="dashboardAdmin-users"><span>Dashboard Admin</span> <i class="bi bi-chevron-right"></i></a></li>
+
+          <!-- Dashborad Teachers -->
+          <li *ngIf="isLoggedIn() && user.role=='teacher'" class="dropdown"><a routerLink="dashboard-Teacher"><span>Dashboard Teacher</span> <i class="bi bi-chevron-right"></i></a></li>
+
+          <!-- Dashboard student -->
+          <li *ngIf="isLoggedIn() && user.role=='student'" class="dropdown"><a routerLink="dashboard-Student"><span>Dashboard Student</span> <i class="bi bi-chevron-right"></i></a>
+           
+          <!-- SEARCH CHILD FOR PARENT -->
+          <li *ngIf="isLoggedIn() && user.role=='parent'" style="margin-left: 25px;">
+            <form #searchForm="ngForm" (ngSubmit)="searchChild()" class="d-flex" role="search">
+              <input class="form-control me-2" type="search" [(ngModel)]="phoneChild" name="phoneChild" placeholder="Search Child by phone" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </li>
+
+          <!-- Profile -->
+          <li *ngIf="isLoggedIn()" class="dropdown">
+            <a href="#">
+            <button type="button" class="btn btn-primary position-relative">
+              Profile
+              <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                <span class="visually-hidden">New alerts</span>
+              </span>
+            </button></a>
+            <ul>
+              <li><a routerLink="profile">Edit Profile</a></li>
+              <li><a (click)="Exit()">LogOut</a></li>
+            </ul>
+          </li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav>
+      <!-- .navbar -->
+      
+      <a *ngIf="!isLoggedIn()" routerLink="login" class="get-started-btn">Login</a>
+      <a *ngIf="!isLoggedIn()" class="active" routerLink="signUp" style="margin-left: 20px;">Sign Up</a>
+
+    </div>
+  </header>
+<!-- End Header -->

@@ -1,0 +1,31 @@
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+      <div class="container">
+        <h1 style="padding-top: 50px;">Child's Notes</h1>
+      </div>
+    </div>
+  <!-- End Breadcrumbs -->
+
+<table class="table table-bordered border-secondary  table-hover" style="margin-top: 20px;">
+    <thead>
+      <tr>
+        <th scope="col">Student's Name</th>
+        <th scope="col">Classes's Name</th>
+        <th scope="col">Teacher's Name</th>
+        <th scope="col">Course's Name</th>
+        <th scope="col">Note</th>
+        <th scope="col">Evaluation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let elt of notes">
+        <th scope="row">{{elt.studentId?.firstName}} {{elt.studentId?.lastName}}</th>
+        <td>{{elt.classId?.name}}</td>
+        <td>{{elt.classId?.teacherId?.firstName}} {{elt.classId?.teacherId?.lastName}}</td>
+        <td>{{elt.classId?.courseId?.name}}</td>
+        <td>{{elt.note}}</td>
+        <td>{{elt.evaluation}}</td>
+      </tr>
+    </tbody>
+  </table>
+

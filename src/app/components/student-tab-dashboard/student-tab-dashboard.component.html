@@ -1,0 +1,21 @@
+<table class="table table-bordered border-secondary  table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#ID note</th>
+        <th scope="col">Course's Name</th>
+        <th scope="col">Teacher's Name</th>
+        <th scope="col">Evaluation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let elt of noteTab">
+        <th scope="row">{{elt._id}}</th>
+        <td>{{ elt.classId?.courseId?.name }}</td>
+        <td>{{ elt.classId?.teacherId?.firstName }} {{ elt.classId?.teacherId?.lastName }}</td>
+        <td>
+          <button type="button" class="btn btn-outline-danger" (click)="displayEvaluation(elt._id)">Display</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+

@@ -1,0 +1,149 @@
+<!-- Font Icon -->
+<link rel="stylesheet" href="assets/colorlib-regform-8/fonts/material-icon/css/material-design-iconic-font.min.css">
+
+<!-- Main css -->
+<link rel="stylesheet" href="assets/colorlib-regform-8/css/style.css">
+
+
+<div class="main">
+	
+	<section class="signup">
+		<div class="container">
+			<div class="signup-content">
+				<form [formGroup]="signupForm" class="signup-form">
+					<h2 class="form-title">Create account</h2>
+					<!-- first name -->
+					<div class="form-group">
+						<input type="text" class="form-input" name="firstName" id="firstName" placeholder="First Name" formControlName="firstName"/>
+						<div *ngIf="signupForm.controls['firstName'].invalid && (signupForm.controls['firstName'].dirty || (signupForm.controls['firstName'].touched))">
+	   						<!-- "touched" se pointe sur validateur "required" -->
+							<div *ngIf="signupForm.controls['firstName'].errors.required" style="color: red;">First Name is required</div>
+	   						<!-- "dirty(something sale or wrong)" se pointe sur validateur "minlength" -->
+							<div *ngIf="signupForm.controls['firstName'].errors.minlength" style="color: red;">First Name must have at least 3 chars</div>
+	  					</div>
+					</div>
+					<!-- last name -->
+					<div class="form-group">
+						<input type="text" class="form-input" name="lastName" id="lastName" placeholder="Last Name" formControlName="lastName"/>
+						<div *ngIf="signupForm.controls['lastName'].invalid && (signupForm.controls['lastName'].dirty || (signupForm.controls['lastName'].touched))">
+							<div *ngIf="signupForm.controls['lastName'].errors.required" style="color: red;">Last Name is required</div>
+							<div *ngIf="signupForm.controls['lastName'].errors.minlength" style="color: red;">Last Name must have at least 3 chars</div>
+						</div>
+					</div>
+					<!-- Email -->
+					<div class="form-group">
+						<input type="email" class="form-input" name="email" id="email" placeholder="Email" formControlName="email"/>
+						<div *ngIf="signupForm.controls['email'].invalid && (signupForm.controls['email'].dirty || (signupForm.controls['email'].touched))">
+							<div *ngIf="signupForm.controls['email'].errors.required" style="color: red;">Email is required</div>
+							<div *ngIf="signupForm.controls['email'].errors.email" style="color: red;">Format Email invalid</div>
+	  					</div>
+					</div>
+					<!-- password -->
+					<div class="form-group">
+						<input type="password" class="form-input" name="password" id="password" placeholder="Password" formControlName="pwd"/>
+						<div *ngIf="signupForm.controls['pwd'].invalid && (signupForm.controls['pwd'].dirty || signupForm.controls['pwd'].touched)">
+							<div *ngIf="signupForm.controls['pwd'].errors.required" style="color: red;">Password is required</div>
+							<div *ngIf="signupForm.controls['pwd'].errors.minlength" style="color: red;">Password must have minimum 6</div>
+							<div *ngIf="signupForm.controls['pwd'].errors.maxlength" style="color: red;">Password must have maximum 12 chars</div>
+	  					</div>
+					</div>
+					<!-- phone -->
+					<div class="form-group">
+						<input type="tel" class="form-input" name="phone" id="phone" placeholder="Phone Number" formControlName="phone"/>
+						<div *ngIf="signupForm.controls['phone'].invalid && (signupForm.controls['phone'].dirty || signupForm.controls['phone'].touched)">
+							<div *ngIf="signupForm.controls['phone'].errors.required" style="color: red;">Phone number is required</div>
+							<div *ngIf="signupForm.controls['phone'].errors.pattern" style="color: red;">Phone number must have at least 8 numbers</div>
+						</div>
+					</div>
+					<!-- adresse -->
+					<div class="form-group">
+						<input type="text" class="form-input" name="home" id="home" placeholder="Adress" formControlName="home"/>
+						<div *ngIf="signupForm.controls['home'].invalid && (signupForm.controls['home'].dirty || (signupForm.controls['home'].touched))">
+							<div *ngIf="signupForm.controls['home'].errors.required" style="color: red;">Adress is required</div>
+							<div *ngIf="signupForm.controls['home'].errors.minlength" style="color: red;">Adress must have numbers & chars</div>
+	  					</div>
+					</div>
+					<!-- role -->
+					<div class="form-group">
+						<!-- role Student -->
+						<div class="form-check form-check-inline">
+							<input type="radio" name="role" value="student" id="agree-term1" class="radio-button" formControlName="role" (change)="onRoleChange('student')" />
+							<label for="agree-term1" class="label-agree-term"><span><span></span></span>Student</label>
+						</div>
+						<!-- role teacher -->
+						<div class="form-check form-check-inline pl-5">
+							<input type="radio" name="role" value="teacher" id="agree-term2" class="radio-button" formControlName="role" (change)="onRoleChange('teacher')" />
+							<label for="agree-term2" class="label-agree-term"><span><span></span></span>Teacher</label>
+						</div>
+						<!-- role parent -->
+						<div class="form-check form-check-inline pl-5">
+							<input type="radio" name="role" value="parent" id="agree-term3" class="radio-button" formControlName="role" (change)="onRoleChange('parent')" />
+							<label for="agree-term3" class="label-agree-term"><span><span></span></span>Parent</label>
+						</div>
+					</div>
+
+					<!-- input Photo Student -->
+					<div class="form-group" *ngIf="selectedRole === 'student'">
+						<label for="inputPhoto" class="form-label">Upload Photo</label>
+						<input type="file" accept="image/png, image/jpeg" class="form-input" name="photo" id="photo" placeholder="Upload Photo" (change)="onImageSelected($event)"/>
+						<img [src]="imagePreview" *ngIf="imagePreview"  class="rounded mx-auto d-block mt-3" width="200px">
+					</div>
+
+					<!-- input Teacher (speciality && cv)-->
+					<div class="form-group" *ngIf="selectedRole === 'teacher'">
+						<!-- speciality -->
+						<div>
+							<input type="text" class="form-input" name="speciality" id="speciality" placeholder="Speciality" formControlName="speciality"/>
+							<div *ngIf="signupForm.controls['speciality'].invalid && (signupForm.controls['speciality'].dirty || (signupForm.controls['speciality'].touched))">
+		  					<div *ngIf="signupForm.controls['speciality'].errors.required" style="color: red;">Speciality is required</div>
+							</div>
+						</div>
+						<!-- upload CV -->
+						<div>
+							<label for="inputPhoto" class="form-label pt-3">Upload your PDF CV</label>
+							<input type="file" accept=".pdf" class="form-input" name="photo" id="photo" placeholder="Upload Photo" (change)="onFileSelected($event)"/>
+							<embed  *ngIf="pdfData" [src]="pdfData" type="application/pdf" width="400" height="500" style="margin-top: 20px; margin-left: 25px;">
+						</div>
+					</div>
+
+					<!-- input Parent (child's Phone number) -->
+					<div class="form-group" *ngIf="selectedRole === 'parent'">
+						<div formArrayName="telephones">
+							<div class="form-group mt-3" *ngFor="let tel of telephones.controls; let i = index">
+							  <div [formGroupName]="i">
+								<div class="input-group">
+								  <input type="tel" class="form-input" name="phone" id="phone" placeholder="Child's Phone" formControlName="phoneChild"/>
+								  <div class="input-group-append">
+									<button type="button" class="btn btn-primary" style="background-color: #fbf2d5; color: #393e46; border: #fbf2d5;" *ngIf="i !== telephones.controls.length - 1" (click)="removeTelephone(i)">
+									  X
+									</button>
+								  </div>
+								</div>
+								<!-- <div *ngIf="phoneChild.get('phoneChild').invalid && (phoneChild.get('phoneChild').dirty || phoneChild.get('phoneChild').touched)">
+								  <div *ngIf="phoneChild.get('phoneChild').errors.required">Telephone is required</div>
+								  <div *ngIf="phoneChild.get('phoneChild').errors.pattern">Telephone must contain 8 numbers</div>
+								</div> -->
+							  </div>
+							</div>
+						  </div>
+						  
+						  <div class="form-group mt-3">
+							<button type="button" class="btn btn-primary" (click)="addTelephone()" style="background-color: #fbf2d5; color: #393e46; border: #fbf2d5;">Add Telephone</button>
+						  </div>
+					</div>
+
+					<!-- bouton sign up -->
+					<div class="form-group">
+						<input type="submit" (click)="signup()" name="submit" id="submit" class="form-submit" value="Sign up"/>
+						<span style="color: red;">{{errorMsg}}</span>
+					</div>
+				</form>
+
+				<!-- link to login page -->
+				<p class="loginhere">
+					Have already an account ? <a href="login" class="loginhere-link">Login here</a>
+				</p>
+			</div>
+		</div>
+	</section>
+</div>

@@ -1,0 +1,23 @@
+<table class="table table-bordered border-secondary  table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Duration</th>
+      <th scope="col" *ngIf="showTeacherName">Teacher</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let course of coursesTabInput" >
+      <td scope="row">{{course.name}}</td>
+      <td>{{course.description}}</td>
+      <td>{{course.dure}}</td>
+      <td *ngIf="showTeacherName">{{course.teacherId.firstName}} {{course.teacherId.lastName}}</td>
+      <td>
+        <button type="button" class="btn btn-outline-primary" (click)="EditCourses(elt._id)">Edit</button>
+        <button type="button" class="btn btn-outline-danger" (click)="deleteCourses(elt._id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

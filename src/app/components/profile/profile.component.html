@@ -1,0 +1,68 @@
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+        <div class="container">
+          <h1>Profile</h1>
+        </div>
+      </div>
+    <!-- End Breadcrumbs -->
+  
+  
+  <!-- Forms -->
+  <div class="site-section mt-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6" style="margin: auto;">
+            
+            <form [formGroup]="userForm">
+                <!-- first Name -->
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control"  formControlName="firstName" id="floatingInput" placeholder="First Name">
+                <label for="floatingInput">First Name</label>
+                <div *ngIf="userForm.controls['firstName'].invalid && (userForm.controls['firstName'].dirty || (userForm.controls['firstName'].touched))">
+                    <!-- "touched" se pointe sur validateur "required" -->
+                 <div *ngIf="userForm.controls['firstName'].errors.required" style="color: red;">First Name is required</div>
+                    <!-- "dirty(something sale or wrong)" se pointe sur validateur "minlength" -->
+                 <div *ngIf="userForm.controls['firstName'].errors.minlength" style="color: red;">First Name must have at least 3 chars</div>
+               </div>
+              </div>
+
+              <!-- last Name -->
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control"  formControlName="lastName" id="floatingInput" placeholder="Last Name">
+                <label for="floatingInput">Last Name</label>
+                <div *ngIf="userForm.controls['lastName'].invalid && (userForm.controls['lastName'].dirty || (userForm.controls['lastName'].touched))">
+                    <div *ngIf="userForm.controls['lastName'].errors.required" style="color: red;">Last Name is required</div>
+                    <div *ngIf="userForm.controls['lastName'].errors.minlength" style="color: red;">Last Name must have at least 3 chars</div>
+                </div>
+              </div>
+
+              <!-- email -->
+              <div class="form-floating mb-3">
+                <input type="email" class="form-control"  formControlName="email" id="floatingInput" placeholder="Email">
+                <label for="floatingInput">Email</label>
+                <div *ngIf="userForm.controls['email'].invalid && (userForm.controls['email'].dirty || (userForm.controls['email'].touched))">
+                    <div *ngIf="userForm.controls['email'].errors.required" style="color: red;">Email is required</div>
+                    <div *ngIf="userForm.controls['email'].errors.email" style="color: red;">Format Email invalid</div>
+                  </div>
+              </div>
+
+              <!-- phone -->
+              <div class="form-floating mb-3">
+                <input type="tel" class="form-control"  formControlName="phone" id="floatingInput" placeholder="Phone">
+                <label for="floatingInput">Phone</label>
+                <div *ngIf="userForm.controls['phone'].invalid && (userForm.controls['phone'].dirty || userForm.controls['phone'].touched)">
+                    <div *ngIf="userForm.controls['phone'].errors.required" style="color: red;">Phone number is required</div>
+                    <div *ngIf="userForm.controls['phone'].errors.pattern" style="color: red;">Phone number must have at least 8 numbers</div>
+                </div>
+              </div>
+
+              <div class="form-group" style="text-align: center; margin-top: 20px;">
+                <input type="submit" (click)="editProfile()" class="btn btn-primary py-3 px-5" value="Edit Profile">
+              </div>
+  
+            </form>  
+          </div>
+        </div>
+      </div>
+    </div>
+  

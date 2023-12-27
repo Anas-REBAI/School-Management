@@ -1,0 +1,67 @@
+      <div class="content">
+        <div class="container">
+          <div class="row justify-content-center">
+
+            <div class="col-md-6 order-md-2">
+              <!-- <img src="assets/login/images/login2.png" alt="Image" class="img-fluid"> -->
+              <section id="hero" class="d-flex justify-content-center align-items-center">
+                <div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">   
+                </div>
+              </section>
+            </div>
+            
+            <div class="col-md-6 contents">
+              <div class="row justify-content-center">
+                <div class="col-md-12">
+                  <div class="form-block">
+                      <div class="mb-4">
+                        <!-- <h3>Sign In to <strong>CrocoDeal</strong></h3> -->
+                      <h3><strong>Member login</strong></h3>
+                        <p>Learning Today, Leading Tomorrow</p>
+                    </div>
+                <!-- Forms -->
+                    <form [formGroup]="loginForm">
+
+                      <div class="form-group first">
+                        <label for="username">Phone number</label>
+                        <input type="tel" class="form-control" formControlName="phone" id="username">
+                        <div *ngIf="loginForm.controls['phone'].invalid && 
+                          (loginForm.controls['phone'].dirty || 
+                          loginForm.controls['phone'].touched)">
+                        <div *ngIf="loginForm.controls['phone'].errors.required" style="color: red;">Phone number is required</div>
+                        <div *ngIf="loginForm.controls['phone'].errors.pattern" style="color: red;">Phone number must have at least 8 numbers</div>
+                        </div> 
+                      </div>
+
+                      <div class="form-group last mb-4">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" formControlName="pwd" id="password">
+                        <div *ngIf="loginForm.controls['pwd'].invalid && (loginForm.controls['pwd'].dirty || loginForm.controls['pwd'].touched)">
+                          <div *ngIf="loginForm.controls['pwd'].errors.required" style="color: red;">Password is required</div>
+                          <div *ngIf="loginForm.controls['pwd'].errors.minlength" style="color: red;">Password must have minimum 6</div>
+                          <div *ngIf="loginForm.controls['pwd'].errors.maxlength" style="color: red;">Password must have maximum 12 chars</div>
+                        </div>
+                      </div>
+                      
+                      <div class="d-flex mb-5 align-items-center">
+                        <label class="control control--checkbox mb-0"><span class="caption">Remember me</span>
+                          <input type="checkbox" checked="checked"/>
+                          <div class="control__indicator"></div>
+                        </label>
+                        <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span> 
+                      </div>
+    
+                      <input type="submit" [disabled]="loginForm.invalid" (click)="login()" value="Log In" class="btn btn-pill text-white btn-block btn-primary" style="background-color: #5fcf80;">
+                      <span style="color: red;">{{errorMsg}}</span>
+                      
+                      <span class="d-block text-center my-4 text-muted">D'ont have an account ?</span>
+                      <span class="d-block text-center my-4"><a href="signUp">Register Now</a></span>
+                      
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div> 
+          </div>
+        </div>
+      </div>     

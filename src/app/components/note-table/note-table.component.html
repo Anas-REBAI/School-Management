@@ -1,0 +1,40 @@
+<table class="table table-bordered border-secondary  table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#ID Class</th>
+        <th scope="col">Class's Name</th>
+        <th scope="col">Teacher's Name</th>
+        <th scope="col">Course's Name</th>
+        <th scope="col">Students</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let elt of groupsTeacherTab">
+        <th scope="row">{{elt._id}}</th>
+        <td>{{elt.name}}</td>
+        <td>{{ elt.teacherId.firstName }} {{ elt.teacherId.lastName }}</td>
+        <td>{{ elt.courseId.name }}</td>
+        <td>
+            <ol>
+                <li *ngFor="let student of elt.studentsId">
+                  {{ student.firstName }} {{ student.lastName }}
+                  <div class="btn-group btn-group-horizontal">
+                    <div *ngFor="let bulletin of bulletins">
+                      <div *ngIf="bulletin.classId == elt._id && bulletin.studentId == student._id">
+                        <button class="btn btn-warning mt-2 mr-2"
+                          (click)="displayStudent(elt._id, student._id)">Display</button>
+                      </div>
+                    </div>
+                    <div>
+                      <button class="btn btn-info mt-2 mr-2" (click)="evaluateStudent(elt._id, student._id)">Evaluate</button>
+                    </div>
+      
+                  </div>
+                </li>
+              </ol>
+        </td>
+        
+        
+      </tr>
+    </tbody>
+  </table>

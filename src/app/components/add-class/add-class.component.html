@@ -1,0 +1,54 @@
+ <!-- ======= Breadcrumbs ======= -->
+ <div class="breadcrumbs">
+    <div class="container">
+      <h1>Add classroom</h1>
+    </div>
+  </div>
+<!-- End Breadcrumbs -->
+
+<div class="site-section mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6" style="margin: auto;">
+          <form #classForm="ngForm" (ngSubmit)="addClassroom()">
+            
+          <!-- classe's name -->
+            <div class="form-floating mb-2">
+              <input type="text" class="form-control" [(ngModel)]="class.name" name="name" id="floatingInput" placeholder="Classes's name">
+              <label for="floatingInput">Classes's name</label>
+            </div>
+
+            <!-- select teacher -->
+            <div class="mb-3">
+                <select class="form-select" id="floatingSelectGrid" (change)="select($event,'teacher')">
+                    <option selected>select menu of Teachers</option>
+                    <option *ngFor="let t of teachers" [value]="t._id">{{ t.firstName }} {{ t.lastName}}</option>
+                </select>
+            </div>
+
+            <!-- select course -->
+            <div class="mb-3">
+                <select class="form-select" id="floatingSelectGrid" (change)="select($event,'course')">
+                    <option selected>select menu of Courses</option>
+                    <option *ngFor="let c of courses" [value]="c._id">{{c.name}}</option>
+                </select>
+            </div>
+
+            <!-- select Students -->
+            <div class="mb-3">
+                <select class="form-select" multiple aria-label="Multiple select example" (change)="select($event,'student')">
+                    <option selected>select menu of Students</option>
+                    <option *ngFor="let s of students" [value]="s._id">{{s.firstName}} {{s.lastName}}</option>
+                </select>
+            </div>
+
+            <!-- button ADD -->
+            <div class="form-group" style="text-align: center; margin-top: 20px;">
+              <input type="submit" class="btn btn-primary py-3 px-5" value="Add Class">
+            </div>
+
+          </form>  
+        </div>
+      </div>
+    </div>
+  </div>

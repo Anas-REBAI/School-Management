@@ -1,0 +1,38 @@
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+      <div class="container">
+        <h1>Find teacher</h1>
+      </div>
+    </div>
+  <!-- End Breadcrumbs -->
+
+<div class="site-section mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6" style="margin: auto;">
+          <form [formGroup]="searchForm">
+
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" formControlName="speciality" id="floatingInput" placeholder="Speciality">
+              <label for="floatingInput">Speciality</label>
+              <div *ngIf="searchForm.controls['speciality'].invalid && searchForm.controls['speciality'].touched">
+                <!-- "touched" se pointe sur validateur "required" -->
+                <div *ngIf="searchForm.controls['speciality'].errors.required" style="color: red;">Speciality is required</div>
+              </div>
+            </div>
+
+            <div class="form-group text-center">
+              <input type="submit" (click)="searchTeachers()" class="btn btn-primary py-3 px-5" value="Search"
+              [disabled]="searchForm.invalid">
+            </div>
+            
+          </form> 
+        </div>
+      </div>
+  <!-- baad me ycharchi affichi resultat --> 
+      <div *ngFor="let m of searchTeachersTab">
+        <app-teacher-structure [teacherStructureInput]="m"></app-teacher-structure>
+      </div>
+   <!--  -->
+    </div>
+</div>
